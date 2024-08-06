@@ -1,0 +1,68 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="author">
+        <createTable tableName="category">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="product">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="price" type="double"/>
+            <column name="explanation" type="varchar(255)"/>
+            <column name="category_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="role">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="user">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="email" type="varchar(255)"/>
+            <column name="username" type="varchar(255)"/>
+            <column name="password" type="varchar(255)"/>
+            <column name="role_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="author">
+        <insert tableName="role">
+            <column name="name" value="admin"/>
+        </insert>
+        <insert tableName="role">
+            <column name="name" value="user"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="electronics"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="clothing"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="book"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="email" value="abc@abc.com"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="admin"/> <!-- You should encode the password in a real application -->
+            <column name="role_id" value="1"/> <!-- Assuming 'admin' role has id=1 -->
+        </insert>
+    </changeSet>
+</databaseChangeLog>
